@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public void calcular(View view) {
         String principioAtivo = tiPrincipioAtivo.getText().toString();
         int k = retornaK();
-        int peso = retornaPeso();
-        int posologia = 30; //fake posologia que vai ser puxada no bd.
+        double peso = retornaPeso();
+        int posologia = 30; //fake posologia que vai ser puxada no bd. pode ter varias posologia com o mesmo tipo de medicamento, ex doxiciclina pra cachorro tem posologia 10 e pra pato 30.
         String[] bdRemedios = {"doxiciclina", "enrofloxacino", "carprofeno"}; // fake bd. a ideia é buscar no banco de dados por esses principios ativos
 
         for (int num1 = 0; num1 < bdRemedios.length; num1++){
@@ -65,15 +65,33 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+        //Alma do calculo
         double tbmAlvo;
         double tbmModelo;
-        double dosetotal;
-        tbmModelo = k*(Math.pow(10,0.75)); // usando modelo de um cao de 10kg
+        double doseTotal;
+        double doseTotalMl;
+        double posologiaAlvo;
+        double frequenciaModelo;
+        double frequenciaAlvo;
+        double tmeAlvo;
+        double tmeModelo;
+        frequenciaModelo = 12; // puxado do bd que diz de quanto em quanto tempo, no caso a cada 12horas
+        tbmModelo = 70*(Math.pow(10,0.75)); // se não for selecionado posologia usa o  modelo de um cao de 10kg
         tbmAlvo = k*(Math.pow(peso,0.75)); // peso do animal alvo que quer medicar.
-        dosetotal = posologia;
+        doseTotal = ((posologia*10)/tbmModelo)*tbmAlvo; // dose total para o animal alvo
+        posologiaAlvo = doseTotal/peso; // para saber a posologia do animal alvo caso queira colocar no BD.
+        tmeModelo = tbmModelo/10;
+        tmeAlvo = tbmAlvo/peso;
+        frequenciaAlvo= (tmeModelo*frequenciaModelo)/tmeAlvo;
 
+        System.out.println("Test o animal alvo vai receber: "+ doseTotal + "mg");
+        System.out.println("test posologia para a animal alvo é: "+ posologiaAlvo );
+        System.out.println("test medicar a cada: "+ frequenciaAlvo );
 
-
+        System.out.println("Test usando a concentração de 20mg/ml");
+        doseTotalMl = doseTotal/20;
+        System.out.println("Test vai receber: " + doseTotalMl + " ml");
         }
         public int retornaK (){
         int k;
@@ -95,8 +113,8 @@ public class MainActivity extends AppCompatActivity {
         }
         }
 
-        public int retornaPeso (){
-        int peso = Integer.parseInt(etPeso.getText().toString());
+        public double retornaPeso (){
+        double peso = Integer.parseInt(etPeso.getText().toString());
         if (rbg.isChecked()){
             peso = peso/1000;
             return peso;
@@ -109,5 +127,3 @@ public class MainActivity extends AppCompatActivity {
         }
 
 }
-
-
