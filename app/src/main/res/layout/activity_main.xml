@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:text="Criar registro"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_peso" />
 
     <Button
         android:id="@+id/button2"
@@ -22,31 +23,56 @@
         android:onClick="calcular"
         android:text="Calcular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_peso" />
 
     <EditText
         android:id="@+id/et_Posologia"
         android:layout_width="176dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Posologia"
         android:inputType="number"
-        android:textSize="10sp"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+    <EditText
+        android:id="@+id/et_NomeCom"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Nome comercial"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_Esp" />
+
+    <EditText
+        android:id="@+id/et_Esp"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Espécie de referência"
+        android:inputType="text"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <EditText
-        android:id="@+id/et_concentração"
+        android:id="@+id/et_concentra"
         android:layout_width="176dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Concentração"
-        android:inputType="textPersonName"
-        android:textSize="10sp"
+        android:inputType="number"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Posologia" />
 
     <EditText
         android:id="@+id/et_peso"
@@ -58,42 +84,57 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="match_parent"
+        android:id="@+id/rg_Grupo"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
-        <RadioButton
-            android:id="@+id/rb_Passaro"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:text="Ave pássaro" />
+        <RadioGroup
+            android:id="@+id/rg_g1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/rb_NPassaro"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:text="Ave não pássaro" />
+            <RadioButton
+                android:id="@+id/rb_Passaro"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:text="Ave pássaro" />
 
-        <RadioButton
-            android:id="@+id/rb_Reptil"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:text="Réptil" />
+            <RadioButton
+                android:id="@+id/rb_NPassaro"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:text="Ave não pássaro" />
 
-        <RadioButton
-            android:id="@+id/rb_MaMetaAlto"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:text="Mamífero meta alto" />
+            <RadioButton
+                android:id="@+id/rb_Reptil"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:text="Réptil" />
 
-        <RadioButton
-            android:id="@+id/rb_MaMetaBaixo"
-            android:layout_width="185dp"
-            android:layout_height="wrap_content"
-            android:text="Mamífero meta baixo" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/rg_g2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <RadioButton
+                android:id="@+id/rb_MaMetaAlto"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:text="Mamífero meta alto" />
+
+            <RadioButton
+                android:id="@+id/rb_MaMetaBaixo"
+                android:layout_width="185dp"
+                android:layout_height="wrap_content"
+                android:text="Mamífero meta baixo" />
+
+        </RadioGroup>
 
     </RadioGroup>
 
@@ -103,7 +144,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+        app:layout_constraintTop_toBottomOf="@+id/rg_Grupo">
 
         <RadioButton
             android:id="@+id/rb_kg"
@@ -122,10 +163,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="Animal alvo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Posologia" />
+        app:layout_constraintTop_toBottomOf="@+id/et_NomeCom" />
 
     <TextView
         android:id="@+id/textView3"
@@ -134,7 +175,7 @@
         android:layout_marginTop="10dp"
         android:text="peso"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/rg_Grupo" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -157,13 +198,5 @@
             android:layout_height="wrap_content"
             android:hint="Principio Ativo" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tv_Teste"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teste"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
