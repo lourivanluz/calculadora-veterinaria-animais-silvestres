@@ -2,29 +2,27 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    tools:context=".MainActivity">
+    tools:context=".Registro">
 
     <Button
         android:id="@+id/bt_salvarRegistro"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:text="Criar registro"
+        android:onClick="salvarRegistro"
+        android:text="Registrar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_peso" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/bt_Voltar"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:onClick="calcular"
-        android:text="Calcular"
+        android:text="Voltar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_peso" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/et_Posologia"
@@ -51,6 +49,18 @@
         app:layout_constraintTop_toBottomOf="@+id/et_Esp" />
 
     <EditText
+        android:id="@+id/et_Freq"
+        android:layout_width="176dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Frequência"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_NomeCom" />
+
+    <EditText
         android:id="@+id/et_Esp"
         android:layout_width="176dp"
         android:layout_height="wrap_content"
@@ -74,15 +84,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_Posologia" />
 
-    <EditText
-        android:id="@+id/et_peso"
-        android:layout_width="185dp"
-        android:layout_height="47dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
     <RadioGroup
         android:id="@+id/rg_Grupo"
         android:layout_width="0dp"
@@ -90,7 +91,7 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_alvo">
+        app:layout_constraintTop_toBottomOf="@+id/cb_AdicionarObs">
 
         <RadioGroup
             android:id="@+id/rg_g1"
@@ -138,44 +139,14 @@
 
     </RadioGroup>
 
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
-        app:layout_constraintTop_toBottomOf="@+id/rg_Grupo">
-
-        <RadioButton
-            android:id="@+id/rb_kg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kg" />
-
-        <RadioButton
-            android:id="@+id/rb_g"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="g" />
-    </RadioGroup>
-
     <TextView
         android:id="@+id/tv_alvo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="Animal alvo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_NomeCom" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="peso"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rg_Grupo" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Freq" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -198,5 +169,48 @@
             android:layout_height="wrap_content"
             android:hint="Principio Ativo" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/cb_AdicionarObs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adicionar observação"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_alvo" />
+
+    <CheckBox
+        android:id="@+id/cb_EditarObs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar observação"
+        app:layout_constraintBaseline_toBaselineOf="@+id/cb_AdicionarObs"
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <EditText
+        android:id="@+id/et_Obs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cb_AdicionarObs" />
+
+    <Button
+        android:id="@+id/bt_SalvaObs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_Obs" />
+
+    <CheckBox
+        android:id="@+id/cb_LimpaAlvo"
+        android:layout_width="185dp"
+        android:layout_height="wrap_content"
+        android:text="Limpar seleção do alvo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_Grupo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,12 @@ package com.example.componentesbasicos;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.TypedArrayUtils;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioGroup rge_g1, rge_g2;
     private TextView tv_alvo;
     private boolean dadosValidados;
+    private Button bt_registro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,12 +46,21 @@ public class MainActivity extends AppCompatActivity {
         rge_g2 = findViewById(R.id.rg_g2);
         etEsp = findViewById(R.id.et_Esp);
         tv_alvo = findViewById(R.id.tv_alvo);
+        bt_registro = findViewById(R.id.bt_salvarRegistro);
 
         radioGrupConfig();
-    }
 
+        bt_registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Registro.class);
+                startActivity(intent);
+            }
+        });
+
+    }
     // gambis pra melhorar o layout dos radiogroup, deve ter um jeito mais facil
-    public void radioGrupConfig ( ){
+    public void radioGrupConfig (){
 
         rge_g1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -146,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
                 // conta base
                 String resultado = calcular.calculo(valorKalvo,peso,posologia,kmodelo);
                 System.out.println("test " + resultado);
-
             }
         }else{
             System.out.println("test falta dados");
@@ -220,5 +231,8 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("test Selecione um tipo de peso"); // precisa selecionar algo, não sei tratar.
             return peso;
         }
-        }
+    }
+
+    //navegar para registro
+
 }
