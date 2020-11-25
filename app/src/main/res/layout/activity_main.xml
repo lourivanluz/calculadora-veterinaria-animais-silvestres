@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".MainActivity">
+    android:background="@color/greenweak"
+    tools:context=".Activitys.MainActivity"
+    >
 
     <Button
         android:id="@+id/bt_salvarRegistro"
@@ -26,60 +28,72 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_peso" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/et_Posologia"
         android:layout_width="176dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_round"
         android:ems="10"
         android:hint="Posologia"
-        android:inputType="number"
-        android:textSize="14sp"
+        android:inputType="number|numberDecimal"
+        android:paddingLeft="10dp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Principioativo" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/et_NomeCom"
         android:layout_width="176dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/edit_round"
         android:ems="10"
         android:hint="Nome comercial"
         android:inputType="text"
-        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_Esp" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/et_Esp"
         android:layout_width="176dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_round"
         android:ems="10"
         android:hint="Espécie de referência"
         android:inputType="text"
-        android:textSize="14sp"
+        android:paddingLeft="10dp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/et_Principioativo" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/et_concentra"
         android:layout_width="176dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="10dp"
+        android:background="@drawable/edit_round"
         android:ems="10"
         android:hint="Concentração"
-        android:inputType="number"
-        android:textSize="14sp"
+        android:inputType="number|numberDecimal"
+        android:paddingLeft="10dp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_Posologia" />
 
     <EditText
         android:id="@+id/et_peso"
         android:layout_width="185dp"
-        android:layout_height="47dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edit_round"
         android:ems="10"
         android:inputType="number"
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -184,19 +198,95 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tv_usuario"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Usuário"
+        app:layout_constraintEnd_toStartOf="@+id/tv_logout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <AutoCompleteTextView
+        android:id="@+id/et_Principioativo"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edit_round"
+        android:hint="Princípio Ativo"
+        android:paddingLeft="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_PrincipioAtivo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Principio Ativo" />
-    </com.google.android.material.textfield.TextInputLayout>
+    <ImageView
+        android:id="@+id/img_principioAtivo"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/imgtextbotton"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/round_double_arrow_24"
+        tools:srcCompat="@drawable/round_double_arrow_24" />
+
+    <ImageView
+        android:id="@+id/img_especie"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/imgtextbotton"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_Esp"
+        app:layout_constraintTop_toBottomOf="@+id/et_Principioativo"
+        app:srcCompat="@drawable/round_double_arrow_24"
+        tools:srcCompat="@drawable/round_double_arrow_24" />
+
+    <ImageView
+        android:id="@+id/img_posologia"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/imgtextbotton"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_Posologia"
+        app:layout_constraintTop_toBottomOf="@+id/et_Principioativo"
+        app:srcCompat="@drawable/round_double_arrow_24"
+        tools:srcCompat="@drawable/round_double_arrow_24" />
+
+    <ImageView
+        android:id="@+id/img_concentracao"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/imgtextbotton"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_Posologia"
+        app:layout_constraintTop_toBottomOf="@+id/img_posologia"
+        app:srcCompat="@drawable/round_double_arrow_24"
+        tools:srcCompat="@drawable/round_double_arrow_24" />
+
+    <ImageView
+        android:id="@+id/img_nomecomercial"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/imgtextbotton"
+        android:padding="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/et_Esp"
+        app:layout_constraintTop_toBottomOf="@+id/img_especie"
+        app:srcCompat="@drawable/round_double_arrow_24"
+        tools:srcCompat="@drawable/round_double_arrow_24" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

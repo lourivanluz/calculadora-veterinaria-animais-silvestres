@@ -1,7 +1,7 @@
-package com.example.componentesbasicos;
+package com.example.componentesbasicos.classes;
 
 
-public class calculos {
+public class CALCULOS {
 
 
     public String calculo (int Kalvo , double peso, double posologia, int kmodelo){
@@ -83,3 +83,23 @@ public class calculos {
         return resultado;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
