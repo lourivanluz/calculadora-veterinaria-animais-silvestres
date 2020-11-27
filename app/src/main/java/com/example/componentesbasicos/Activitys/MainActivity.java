@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -18,6 +19,8 @@ import android.widget.TextView;
 
 import com.example.componentesbasicos.R;
 import com.example.componentesbasicos.classes.CALCULOS;
+import com.example.componentesbasicos.classes.ServiceProvider;
+import com.example.componentesbasicos.models.PrincipioAtivo;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -28,8 +31,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Observer {
 
     private EditText etPeso;
     private RadioButton rbPassaro, rbNPassaro, rbReptil, rbMaMetaAlto, rbMaMetabaixo, rbKg, rbg;
@@ -42,10 +47,19 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imgposologia, imgprincipioAtivo, imgespecie, imgcomecial, imgconcentracao;
     private FirebaseDatabase database;
     private Integer kmodelo, frequencia;
+    private DatabaseReference ref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //inicializa o singleton para popular o database
+        ServiceProvider.getDataBaseService();
+
         super.onCreate(savedInstanceState);
+
+        //fala pra nossa tela, que ela tem q observar todas alterações na classe singleton Geral
+        ServiceProvider.getGeralService().addObserver(this);
+
         setContentView(R.layout.activity_main);
 
         etPrincipioAtivo = findViewById(R.id.et_Principioativo);
@@ -84,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         tv_usuario.setText(usuario.getDisplayName());
 
         radioGrupConfig();
-        preenchePrincioAtivo();
+
 
         bt_registro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 
@@ -320,26 +335,20 @@ public class MainActivity extends AppCompatActivity {
     //busca os dados no bd e faz um array pro autocomplete
 
     public void preenchePrincioAtivo() {
-        DatabaseReference reference = database.getReference().child("principio ativo");
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            List<String> listPrincioAtivo = new ArrayList<String>();
+        //TODO - Remover isso aqui... horrível... gambi das piores
+        List<String> listPrincip = new ArrayList<String>();
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        String principioAtivo = data.child("medicamento").getValue(String.class);
-                        listPrincioAtivo.add(principioAtivo);
-                    }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, listPrincioAtivo);
-                    etPrincipioAtivo.setAdapter(adapter);
+        if (ServiceProvider.getGeralService().TodosPrincipios != null) {
 
+            for (PrincipioAtivo item : ServiceProvider.getGeralService().TodosPrincipios) {
+                listPrincip.add(item.Nome);
             }
 
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_dropdown_item_1line, listPrincip);
+            etPrincipioAtivo.setAdapter(adapter);
+        }
+
     }
 
     public void preencheEspecie(String princioAtivo) {
@@ -398,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void preencheNomeComercial(String princioAtivo) {
 
-        DatabaseReference reference = database.getReference().child("principio ativo").child(princioAtivo).child("nome comercial");
+        DatabaseReference reference = ServiceProvider.getDataBaseService().child("principio ativo").child(princioAtivo).child("nome comercial");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             List<String> listnomecomercial = new ArrayList<String>();
 
@@ -446,4 +455,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
+        preenchePrincioAtivo();
+    }
 }
